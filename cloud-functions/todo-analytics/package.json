@@ -1,0 +1,25 @@
+{
+  "name": "todo-analytics-function",
+  "version": "1.0.0",
+  "description": "Todo Analytics Cloud Function for Google Cloud Platform",
+  "main": "index.js",
+  "scripts": {
+    "start": "functions-framework --target=todoAnalytics",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.3.0",
+    "pg": "^8.11.0"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "keywords": [
+    "google-cloud-functions",
+    "analytics",
+    "postgresql",
+    "todo-app"
+  ],
+  "author": "Todo App Team",
+  "license": "MIT"
+} 

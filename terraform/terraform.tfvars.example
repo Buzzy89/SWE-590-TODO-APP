@@ -1,0 +1,24 @@
+# Google Cloud Project Configuration
+project_id = "your-gcp-project-id"
+region     = "us-central1"
+zone       = "us-central1-a"
+
+# Application Configuration
+environment = "dev"
+app_name    = "todo-app"
+
+# Database Configuration
+db_name     = "todoapp"
+db_user     = "postgres"
+db_password = "SecurePassword123!"
+
+# Network Configuration
+network_cidr = "10.0.0.0/16"
+subnet_cidr  = "10.0.1.0/24"
+
+# Scaling Configuration
+max_instances    = 3
+cpu_utilization  = 50
+
+# VM Configuration (Free Tier)
+postgres_machine_type = "e2-micro" 
