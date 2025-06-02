@@ -111,4 +111,7 @@ env/
 venv/
 ENV/
 env.bak/
-venv.bak/ 
+venv.bak/
+
+# Architecture diagram virtual environment
+architecture/diagram_env/ 
