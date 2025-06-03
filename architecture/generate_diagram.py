@@ -5,12 +5,11 @@ Using the Diagrams library to create professional architecture diagrams
 """
 
 from diagrams import Diagram, Cluster, Edge
-from diagrams.gcp.compute import GKE, ComputeEngine
+from diagrams.gcp.compute import GKE, ComputeEngine, Functions
 from diagrams.gcp.database import SQL
 from diagrams.gcp.network import LoadBalancing, VPC
 from diagrams.gcp.storage import GCS
 from diagrams.gcp.devtools import ContainerRegistry
-from diagrams.gcp.analytics import CloudFunctions
 from diagrams.k8s.compute import Pod, Deployment
 from diagrams.k8s.network import Service
 from diagrams.onprem.client import Users
@@ -54,10 +53,11 @@ def generate_architecture_diagram():
             with Cluster("Compute Engine"):
                 database = ComputeEngine("PostgreSQL\n(e2-micro)")
             
-            # Cloud Functions
-            with Cluster("Cloud Functions"):
-                ai_insights = CloudFunctions("AI Insights\n(Natural Language API)")
-                health_monitor = CloudFunctions("Health Monitor\n(Periodic checks)")
+            # Cloud Functions - Serverless Microservices
+            with Cluster("Cloud Functions (Serverless)"):
+                todo_insights = Functions("Todo Insights Function\n• AI Categorization & Priority\n• Natural Language API\n• 256MB, Node.js 18")
+                todo_analytics = Functions("Todo Analytics Function\n• Global Statistics\n• User Activity Analysis\n• PostgreSQL Connection")
+                health_monitor = Functions("Health Monitor Function\n• System Health Checks\n• Automated Monitoring\n• 5-minute intervals")
             
             # Container Registry
             registry = ContainerRegistry("Container Registry\n- auth:optimized-v4\n- frontend:updated-v2\n- todo:latest")
@@ -79,8 +79,9 @@ def generate_architecture_diagram():
         todo_pod >> Edge(label="DB Queries") >> database
         
         # Functions connections
-        auth_pod >> Edge(label="Health checks") >> health_monitor
-        todo_pod >> Edge(label="AI analysis") >> ai_insights
+        todo_pod >> Edge(label="AI Categorization\nPriority Prediction") >> todo_insights
+        frontend_service >> Edge(label="Analytics Reports\nStatistics") >> todo_analytics
+        health_monitor >> Edge(label="Health Checks") >> [auth_pod, todo_pod, frontend_pod]
         
         # CI/CD connections
         cicd >> Edge(label="Build & Push") >> registry
@@ -126,7 +127,7 @@ def generate_cost_breakdown_diagram():
             network_cost = LoadBalancing("Network & LB\n$19.20 (13%)")
             compute_cost = ComputeEngine("Compute Engine\n$7.41 (5%)")
             build_cost = GCS("Cloud Build\n$5.00 (3%)")
-            functions_cost = CloudFunctions("Cloud Functions\n$2.23 (1.5%)")
+            functions_cost = Functions("Cloud Functions\n$2.23 (1.5%)")
             registry_cost = ContainerRegistry("Container Registry\n$0.26 (0.2%)")
             
             total = GCS("Total: $150/month\nBudget: $300 ✅")

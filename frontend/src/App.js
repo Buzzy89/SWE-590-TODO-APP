@@ -6,7 +6,7 @@ import './App.css';
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://34.22.249.41:30081';
 const AUTH_API_URL = process.env.REACT_APP_AUTH_URL || 'http://34.22.249.41:30081';
 const TODO_API_URL = process.env.REACT_APP_TODO_URL || 'http://34.22.249.41:30082';
-const TODO_INSIGHTS_URL = process.env.REACT_APP_TODO_INSIGHTS_URL || 'https://todo-app-insights-dev-hkyc653hka-uc.a.run.app';
+const TODO_INSIGHTS_URL = process.env.REACT_APP_TODO_INSIGHTS_URL || 'https://todo-app-insights-dev-tbv5uyb5va-ew.a.run.app';
 
 function App() {
   const [user, setUser] = useState(null);

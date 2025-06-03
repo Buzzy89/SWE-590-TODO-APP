@@ -45,9 +45,22 @@ const priorityKeywords = {
 
 functions.http('todoInsights', async (req, res) => {
   // Set CORS headers for all requests
-  res.set('Access-Control-Allow-Origin', 'http://34.22.249.41:30080');
+  const allowedOrigins = [
+    'http://34.22.249.41:30080',
+    'http://localhost:3000',
+    'https://todo-app-frontend-dev.netlify.app'
+  ];
+  
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.set('Access-Control-Allow-Origin', origin);
+  } else {
+    res.set('Access-Control-Allow-Origin', '*'); // Fallback for development
+  }
+  
   res.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.set('Access-Control-Allow-Credentials', 'true');
   res.set('Access-Control-Max-Age', '3600');
   
   // Handle preflight requests
